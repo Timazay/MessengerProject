@@ -8,7 +8,7 @@
     <changeSet id="05-create-refresh_tokens-table" author="Тимофей Зайцев">
         <preConditions onFail="HALT">
             <not>
-                <tableExists tableName="contracts"/>
+                <tableExists tableName="refresh_tokens"/>
             </not>
         </preConditions>
         <createTable tableName="refresh_tokens">

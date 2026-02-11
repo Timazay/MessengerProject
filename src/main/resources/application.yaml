@@ -22,7 +22,6 @@ spring:
       mode: always
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
-    drop-first: true
   mail:
     host: ${mail.transport.protocol}.gmail.com
     port: ${MAIL_PORT:587}
