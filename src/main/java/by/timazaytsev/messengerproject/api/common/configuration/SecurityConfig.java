@@ -1,6 +1,8 @@
 package by.timazaytsev.messengerproject.api.common.configuration;
 
+import by.timazaytsev.messengerproject.api.common.configuration.filter.CustomAuthenticationEntryPoint;
 import by.timazaytsev.messengerproject.api.common.configuration.filter.JwtAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +28,31 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(requests ->
-                        requests.requestMatchers("/api/v1/auth/**", "/messenger-project/**").permitAll()
+                        requests.
+                                requestMatchers(
+                                        "/v3/api-docs/**",
+                                        "/v3/api-docs.yaml",
+                                        "/messenger-project/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/messenger-project/swagger-ui/**",
+                                        "/messenger-project/swagger-ui.html",
+                                        "/swagger-resources/**",
+                                        "/swagger-resources",
+                                        "/webjars/**"
+                                ).permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/test/**").authenticated()
                                 )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .accessDeniedHandler((request, response, accessDeniedException) ->
+                                response.setStatus(HttpServletResponse.SC_FORBIDDEN)))
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

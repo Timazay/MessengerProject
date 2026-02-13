@@ -1,18 +1,12 @@
 package by.timazaytsev.messengerproject.api.common.configuration.filter;
 
-import by.timazaytsev.messengerproject.api.common.ErrorResponseDto;
 import by.timazaytsev.messengerproject.api.common.service.JwtService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,13 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        try {
-            doFilter(request, response, filterChain, authHeader);
-        } catch (ExpiredJwtException e) {
-            catchException("token expired", response);
-        } catch (JwtException e) {
-            catchException("something went wrong with token", response);
-        }
+        doFilter(request, response, filterChain, authHeader);
     }
 
     private void doFilter(HttpServletRequest request,
@@ -81,13 +69,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return userDetailsService.loadUserByUsername(mail);
     }
 
-    private void catchException(String message, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ErrorResponseDto error = new ErrorResponseDto("401 UNAUTHORIZED",
-                message);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(response.getWriter(), error);
-    }
 }

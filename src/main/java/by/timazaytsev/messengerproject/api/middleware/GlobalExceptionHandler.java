@@ -1,7 +1,6 @@
 package by.timazaytsev.messengerproject.api.middleware;
 
 import by.timazaytsev.messengerproject.api.common.ErrorResponseDto;
-import io.jsonwebtoken.JwtException;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler({
             UsernameNotFoundException.class,
-            JwtException.class
+            BadCredentialsException.class
     })
     public ErrorResponseDto handleBadRequestsException(Exception e) {
         return new ErrorResponseDto("401 UNAUTHORIZED", e.getMessage());
