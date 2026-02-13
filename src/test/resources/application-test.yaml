@@ -1,0 +1,14 @@
+images:
+  postgres: postgres:16-alpine
+jwt:
+  secret: wrMYa5NtAniZDuLU8aiqBMEgjd5i1fa+j1B71R3SdMs=
+  access:
+    expiration: 900000 # 15 minutes
+  refresh:
+    expiration: 604800000 # 7 days
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.web: DEBUG
+    org.springframework.security.authentication: DEBUG
+    org.springframework.security.access: DEBUG

@@ -17,7 +17,7 @@ java {
 ext {
 	mapstructVersion = '1.5.5.Final'
 	lombokMapstructVersion = '0.2.0'
-	springdocVersion = '2.6.0'
+	springdocVersion = '2.8.15'
 	jwtWebTokenVersion = '0.11.5'
 }
 
@@ -60,8 +60,10 @@ dependencies {
 
 	// Tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:testcontainers'
+	testImplementation 'org.testcontainers:postgresql'
 }
 
 tasks.named('test') {
