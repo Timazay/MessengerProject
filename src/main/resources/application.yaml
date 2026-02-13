@@ -6,9 +6,9 @@ spring:
    name: MessengerProject
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/messenger_db}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATA_SOURCE_URL:jdbc:postgresql://localhost:5432/messenger_db}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:123}
   jpa:
     hibernate:
       ddl-auto: validate

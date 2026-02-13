@@ -7,4 +7,5 @@ RUN chmod +x gradlew && ./gradlew clean build
 FROM eclipse-temurin:21-alpine AS develop-runtime
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
+COPY .env .env
 ENTRYPOINT ["java", "-jar", "app.jar"]
