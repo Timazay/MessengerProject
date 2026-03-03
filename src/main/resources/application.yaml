@@ -3,7 +3,7 @@ server:
   forward-headers-strategy: framework
 spring:
   application:
-   name: MessengerProject
+   name: MessengerProjectAuthService
   datasource:
     driverClassName: org.postgresql.Driver
     url: ${SPRING_DATA_SOURCE_URL:jdbc:postgresql://localhost:5432/messenger_db}
