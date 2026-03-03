@@ -1,4 +1,12 @@
 package by.timazaytsev.messengerproject.features.authorization.login;
 
-public record LoginRequest(String emailOrUsername, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record LoginRequest(
+
+        @NotBlank(message = "Email or username is required")
+        String emailOrUsername,
+        @NotBlank(message = "Password is required")
+        String password
+) {
 }

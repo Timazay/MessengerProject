@@ -5,10 +5,9 @@ import by.timazaytsev.messengerproject.api.common.exception.NotFoundException;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,11 +22,11 @@ public class GlobalExceptionHandler {
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponseDto.class)))
     @ExceptionHandler({
-            ConstraintViolationException.class
+            MethodArgumentNotValidException.class
     })
-    public ResponseEntity<ErrorResponseDto> handleBadRequests(Exception e) {
-        return new ResponseEntity<>(
-                new ErrorResponseDto("400 Bad Request", e.getMessage()), HttpStatus.BAD_REQUEST);
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDto handleValidationExceptions(MethodArgumentNotValidException ex) {
+        return new ErrorResponseDto("400", ex.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
