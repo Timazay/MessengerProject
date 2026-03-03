@@ -1,11 +1,11 @@
 package by.timazaytsev.messengerproject.features.authorization.login;
 
-import by.timazaytsev.messengerproject.api.common.service.JwtService;
+import by.timazaytsev.messengerproject.api.common.exception.NotFoundException;
+import by.timazaytsev.messengerproject.api.common.security.service.JwtService;
 import by.timazaytsev.messengerproject.features.authorization.common.AuthResponse;
 import by.timazaytsev.messengerproject.infrastructure.entity.RefreshToken;
 import by.timazaytsev.messengerproject.infrastructure.entity.User;
 import by.timazaytsev.messengerproject.infrastructure.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -131,7 +131,7 @@ public class LoginHandlerTest {
     }
 
     @Test
-    void authenticate_ShouldThrowEntityNotFoundException_WhenUserNotFound() {
+    void authenticate_ShouldThrowNotFoundException_WhenUserNotFound() {
         // Arrange
         when(userRepository.findUserByUsername(loginRequest.emailOrUsername()))
                 .thenReturn(Optional.empty());
@@ -139,7 +139,7 @@ public class LoginHandlerTest {
                 .thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(EntityNotFoundException.class,
+        assertThrows(NotFoundException.class,
                 () -> loginHandler.authenticate(loginRequest));
 
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));

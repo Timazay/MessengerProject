@@ -1,6 +1,6 @@
-package by.timazaytsev.messengerproject.api.middleware;
+package by.timazaytsev.messengerproject.features.authorization.common;
 
-import by.timazaytsev.messengerproject.api.common.ErrorResponseDto;
+import by.timazaytsev.messengerproject.api.common.exception.ErrorResponseDto;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

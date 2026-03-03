@@ -1,4 +1,4 @@
-package by.timazaytsev.messengerproject.api.common.service;
+package by.timazaytsev.messengerproject.api.common.security.service;
 
 import by.timazaytsev.messengerproject.infrastructure.entity.User;
 import by.timazaytsev.messengerproject.infrastructure.repository.UserRepository;

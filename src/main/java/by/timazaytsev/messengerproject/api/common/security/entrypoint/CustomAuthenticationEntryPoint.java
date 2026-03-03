@@ -1,6 +1,6 @@
-package by.timazaytsev.messengerproject.api.common.configuration.filter;
+package by.timazaytsev.messengerproject.api.common.security.entrypoint;
 
-import by.timazaytsev.messengerproject.api.common.ErrorResponseDto;
+import by.timazaytsev.messengerproject.api.common.exception.ErrorResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

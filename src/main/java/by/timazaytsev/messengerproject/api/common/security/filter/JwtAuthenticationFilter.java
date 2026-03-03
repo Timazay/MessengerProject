@@ -1,6 +1,6 @@
-package by.timazaytsev.messengerproject.api.common.configuration.filter;
+package by.timazaytsev.messengerproject.api.common.security.filter;
 
-import by.timazaytsev.messengerproject.api.common.service.JwtService;
+import by.timazaytsev.messengerproject.api.common.security.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,5 +68,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return userDetailsService.loadUserByUsername(username);
         return userDetailsService.loadUserByUsername(mail);
     }
-
 }

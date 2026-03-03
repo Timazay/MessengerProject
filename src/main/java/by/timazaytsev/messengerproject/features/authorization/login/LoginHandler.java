@@ -1,11 +1,11 @@
 package by.timazaytsev.messengerproject.features.authorization.login;
 
+import by.timazaytsev.messengerproject.api.common.exception.NotFoundException;
 import by.timazaytsev.messengerproject.features.authorization.common.AuthResponse;
-import by.timazaytsev.messengerproject.api.common.service.JwtService;
+import by.timazaytsev.messengerproject.api.common.security.service.JwtService;
 import by.timazaytsev.messengerproject.infrastructure.entity.RefreshToken;
 import by.timazaytsev.messengerproject.infrastructure.entity.User;
 import by.timazaytsev.messengerproject.infrastructure.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,7 +32,7 @@ public class LoginHandler {
 
         User user = userRepository.findUserByUsername(request.emailOrUsername())
                 .orElseGet(() -> userRepository.findUserByMail(request.emailOrUsername())
-                        .orElseThrow(() -> new EntityNotFoundException("User not found")));
+                        .orElseThrow(() -> new NotFoundException("User not found")));
 
         String accessToken = jwtService.generateAccessToken(user);
         RefreshToken refreshToken = jwtService.generateRefreshToken(user);

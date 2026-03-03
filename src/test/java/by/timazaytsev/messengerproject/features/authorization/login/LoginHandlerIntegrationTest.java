@@ -2,8 +2,8 @@ package by.timazaytsev.messengerproject.features.authorization.login;
 
 import by.timazaytsev.messengerproject.MessengerProjectApplication;
 import by.timazaytsev.messengerproject.api.common.configuration.MinIOConfig;
-import by.timazaytsev.messengerproject.api.common.configuration.filter.JwtAuthenticationFilter;
-import by.timazaytsev.messengerproject.api.common.service.JwtService;
+import by.timazaytsev.messengerproject.api.common.security.filter.JwtAuthenticationFilter;
+import by.timazaytsev.messengerproject.api.common.security.service.JwtService;
 import by.timazaytsev.messengerproject.configuration.EnvironmentTestConfig;
 import by.timazaytsev.messengerproject.features.authorization.common.AuthResponse;
 import by.timazaytsev.messengerproject.infrastructure.entity.RefreshToken;
@@ -42,7 +42,7 @@ import static org.mockito.Mockito.verify;
 @Testcontainers(disabledWithoutDocker = true)
 @Import(EnvironmentTestConfig.class)
 @ActiveProfiles("test")
-public class   LoginHandlerIntegrationTest {
+public class LoginHandlerIntegrationTest {
 
     @MockitoSpyBean
     private JwtService jwtService;

@@ -1,4 +1,4 @@
-package by.timazaytsev.messengerproject.api.common;
+package by.timazaytsev.messengerproject.api.common.exception;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

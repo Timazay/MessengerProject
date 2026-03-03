@@ -1,7 +1,7 @@
 package by.timazaytsev.messengerproject.api.common.configuration;
 
-import by.timazaytsev.messengerproject.api.common.configuration.filter.CustomAuthenticationEntryPoint;
-import by.timazaytsev.messengerproject.api.common.configuration.filter.JwtAuthenticationFilter;
+import by.timazaytsev.messengerproject.api.common.security.entrypoint.CustomAuthenticationEntryPoint;
+import by.timazaytsev.messengerproject.api.common.security.filter.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
